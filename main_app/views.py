@@ -1,5 +1,6 @@
 from django.shortcuts import render
-
+from django.views.generic.edit import CreateView
+from.models import Movie, Review
 # Define the home view
 def home(request):
     return render(request, 'home.html')
@@ -8,17 +9,27 @@ def about(request):
     return render(request, 'about.html')
 
 def movies_index(request):
+    movies = Movie.objects.all()
     return render(request, 'movies/index.html', {'movies': movies})
 
-class Movie:
-    def __init__(self, title, genre, year, director, description, poster):
-        self.title = title
-        self.genre = genre
-        self.year = year
-        self.director = director
-        self.description = description
-        self.poster = poster
+def movies_detail(request, movie_id):
+    movie = Movie.objects.get(id=movie_id)
+    return render(request, 'movies/detail.html', { 'movie': movie })
 
-movies = [
-    Movie('Bladerunner', 'Sci-Fi', '1982', 'Ridley Scott', 'In a cyberpunk vision of the future, man has developed the technology to create replicants - humanoid androids with short, fixed lifespans - which are illegal on Earth, but are used in the off-world colonies.', 'no image')
-]
+def reviews_index(request):
+    reviews = Review.objects.all()
+    return render(request, 'reviews/index.html', {'reviews': reviews})
+
+def reviews_detail(request, review_id):
+    review = Review.objects.get(id=review_id)
+    return render(request, 'reviews/detail.html', {'review': review})
+
+# Add def assoc_review???
+
+
+class ReviewCreate(CreateView):
+    model = Review
+    fields = ['title', 'description', 'rating']
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
