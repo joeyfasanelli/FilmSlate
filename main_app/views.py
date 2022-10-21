@@ -8,3 +8,6 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def movie_index(request):
+    return render(request, 'movies/index.html', {'movies': movies})
