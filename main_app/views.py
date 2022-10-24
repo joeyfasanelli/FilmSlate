@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from.models import Movie, Review
 # Define the home view
 def home(request):
@@ -33,3 +33,26 @@ class ReviewCreate(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+class MovieCreate(CreateView):
+    model = Movie
+    fields = ['title', 'genre', 'year', 'director', 'description', 'poster']
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class ReviewUpdate(UpdateView):
+  model = Review
+  fields = ['title', 'description', 'rating']
+
+class ReviewDelete(DeleteView):
+  model = Review
+  success_url = '/reviews/'
+
+class MovieUpdate(UpdateView):
+  model = Movie
+  fields = ['title', 'genre', 'year', 'director', 'description', 'poster']
+
+class MovieDelete(DeleteView):
+  model = Movie
+  success_url = '/movies/'

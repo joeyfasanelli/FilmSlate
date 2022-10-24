@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 class Movie(models.Model):
     title = models.CharField(max_length=100)
@@ -19,7 +20,8 @@ class Movie(models.Model):
 class Review(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=1000)
-    rating = models.IntegerField()
-
+    rating = models.IntegerField(choices=list(zip(range(1, 11), range(1, 11))))
+    
+    
     def get_absolute_url(self):
-        return reverse('reviews_detail', kwargs={'pk': self.id})
+        return reverse('reviews_detail', kwargs={'review_id': self.id})

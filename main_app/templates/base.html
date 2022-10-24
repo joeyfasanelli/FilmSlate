@@ -30,14 +30,18 @@
         <li class="nav-item">
           <a class="nav-link" href="/about">About</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'reviews_create' %}">Add Review</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'movies_create' %}">Add Movie</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="#">Sign In</a>
             <a class="dropdown-item" href="#">Sign Out</a>
             <a class="dropdown-item" href="#">My Account</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
           </div>
         </li>
       </ul>

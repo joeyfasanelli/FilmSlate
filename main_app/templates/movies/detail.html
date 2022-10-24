@@ -4,6 +4,11 @@
   <h1> {{ movie.title }}</h1>
   <h5> {{movie.year}} ({{ movie.genre }}) - Directed by {{ movie.director }}</h2>
   <h7> {{ movie.description }}</h7>
+  <br></br>
+<div>
+    <a href="{% url 'movies_update' movie.id %}" type='button' class='btn btn-warning'>Edit</a>
+    <a href="{% url 'movies_delete' movie.id %}" type='button' class='btn btn-danger'>Delete</a>
+</div>
 </div>
 
 {% endblock %}

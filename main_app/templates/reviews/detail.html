@@ -6,7 +6,13 @@
 
 <div>
     {{ review.description }}
-    {{ review.rating }}
+<br></br>
+    {{ review.rating }}/10 Stars
+<br></br>
+<div>
+    <a href="{% url 'reviews_update' review.id %}" type='button' class='btn btn-warning'>Edit</a>
+    <a href="{% url 'reviews_delete' review.id %}" type='button' class='btn btn-danger'>Delete</a>
+</div>
 </div>
 
 {% endblock %}
