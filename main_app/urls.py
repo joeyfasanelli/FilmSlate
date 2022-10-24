@@ -14,4 +14,5 @@ urlpatterns = [
     path('reviews/<int:pk>/delete/', views.ReviewDelete.as_view(), name='reviews_delete'),
     path('movies/<int:pk>/update/', views.MovieUpdate.as_view(), name='movies_update'),
     path('movies/<int:pk>/delete/', views.MovieDelete.as_view(), name='movies_delete'),
+    path('accounts/signup/', views.signup, name='signup'),
 ]
