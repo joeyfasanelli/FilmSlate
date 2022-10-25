@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from.models import MovieReview, TvReview
+from.models import MovieReview, TvReview, Reaction, Movie
 import requests
 
 #TMBD_API_KEY = "27866702f39bce28cfa7752a49f16399"
@@ -105,6 +105,21 @@ def review_page_tv(request, tv_id):
     return render(request, "tv_reviews.html", {"name": name, "reviews": reviews})
 
 
+@login_required
+def assoc_reaction(request, movie_id, reaction_id):
+  Movie.objects.get(id=movie_id).reactions.add(reaction_id)
+  return redirect('detail', movie_id=movie_id)
+
+@login_required
+def movies_index(request):
+    movies = Movie.objects.filter(user=request.user)
+    return render(request, 'movies/index.html', {'movies': movies})
+
+@login_required
+def movies_detail(request, movie_id):
+    movie = Movie.objects.get(id=movie_id)
+    reactions_movie_doesnt_have = Reaction.objects.exclude(id__in = movie.reactions.all().values_list('id'))
+    return render(request, 'movies/detail.html', { 'movie': movie, 'reactions': reactions_movie_doesnt_have })
 
 def signup(request):
   error_message = ''
@@ -128,20 +143,12 @@ def signup(request):
 
 
 
-
-# class ReviewCreate(CreateView):
-#     model = Review
-#     fields = ['review', 'rating']
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super().form_valid(form)
-
-# class MovieCreate(LoginRequiredMixin, CreateView):
-#     model = Movie
-#     fields = ['title', 'genre', 'year', 'director', 'description', 'poster']
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super().form_valid(form)
+class MovieCreate(LoginRequiredMixin, CreateView):
+    model = Movie
+    fields = ['title', 'description']
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
     
 class TvReviewUpdate(LoginRequiredMixin, UpdateView):
   model = TvReview
@@ -161,10 +168,10 @@ class MovieReviewDelete(LoginRequiredMixin, DeleteView):
   model = MovieReview
   success_url = '/'
 
-# class MovieUpdate(LoginRequiredMixin, UpdateView):
-#   model = Movie
-#   fields = ['title', 'genre', 'year', 'director', 'description', 'poster']
+class MovieUpdate(LoginRequiredMixin, UpdateView):
+  model = Movie
+  fields = ['title', 'description']
 
-# class MovieDelete(LoginRequiredMixin, DeleteView):
-#   model = Movie
-#   success_url = '/movies/'
+class MovieDelete(LoginRequiredMixin, DeleteView):
+  model = Movie
+  success_url = '/movies/'
