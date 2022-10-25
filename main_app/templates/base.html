@@ -25,17 +25,9 @@
           <a class="nav-link" href="/about">About</a>
         </li>
         {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="/movies">Movies</a>
-        </li>
+        
         <li class="nav-item">
           <a class="nav-link" href="/reviews">Reviews</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'reviews_create' %}">Add Review</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'movies_create' %}">Add Movie</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
@@ -57,18 +49,22 @@
           </div>
         </li> -->
       </ul>
-      <!-- <form class="d-flex">
-        <input class="form-control me-sm-2" type="text" placeholder="Search">
+      <form class="d-flex" action="/search/" method="get">
+          <select class="form-select" name="type">
+            <option value="movie">Movie</option>
+            <option value="tv">TV Show</option>
+          </select>
+        <input class="form-control me-sm-2" type="text" placeholder="Search" name="q">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form> -->
+      </form>
     </div>
   </div>
 </nav>
     </header>
     <main class="container" >{% block content %} {% endblock %}</main>
-    <footer class="footer fixed-bottom">
+    <footer class="footer">
       <div class="col-md-8 offset-md-5"> 
-        All Rights Reserved, © 2022 FilmSlate
+        All Rights Reserved © 2022 FilmSlate
       </div>
     </footer>
   </body>
