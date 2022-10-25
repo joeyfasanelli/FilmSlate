@@ -24,8 +24,10 @@ Reviews
     </div>
     <div class="card-body text-black bg-white">
       <blockquote class="blockquote mb-0">
-        <p>{{ r.review }}</p>
+        <p>{{ r.movie_review }}</p>
       </blockquote>
+      <a href="{% url 'movie_reviews_update' r.id %}">Edit</a>
+      <a href="{% url 'movie_reviews_delete' r.id %}">Delete</a>
     </div>
   </div>
   <br>

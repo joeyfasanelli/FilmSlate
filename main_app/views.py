@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from.models import Review
+from.models import MovieReview, TvReview
 import requests
 
 #TMBD_API_KEY = "27866702f39bce28cfa7752a49f16399"
@@ -61,49 +61,50 @@ def view_trending_results(request):
 
 
 @login_required
-def review_page(request, movie_id):
+def review_page_movie(request, movie_id):
   if request.method == "POST":
     user = request.user
-    review = request.POST.get("review")
+    movie_review = request.POST.get("review")
 
     if not request.user.is_authenticated:
       user = User.objects.get(id=1)
 
-    Review(review=review, user=user, movie_id=movie_id).save()
+    MovieReview(movie_review=movie_review, user=user, movie_id=movie_id).save()
 
-    return redirect(f"/movie/{movie_id}/reviews")
+    return redirect(f"/movie/{movie_id}/review")
   
   else:
     data = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=27866702f39bce28cfa7752a49f16399&language=en-US")
     title = data.json()["title"]
 
-    reviews = reversed(Review.objects.filter(movie_id=movie_id))
+    reviews = reversed(MovieReview.objects.filter(movie_id=movie_id))
 
-    return render(request, "reviews.html", {"title": title, "reviews": reviews})
-
-
+    return render(request, "movie_reviews.html", {"title": title, "reviews": reviews})
 
 
 
-# @login_required
-# def movies_index(request):
-#     movies = Movie.objects.filter(user=request.user)
-#     return render(request, 'movies/index.html', {'movies': movies})
+@login_required
+def review_page_tv(request, tv_id):
+  if request.method == "POST":
+    user = request.user
+    tv_review = request.POST.get("review")
 
-# @login_required
-# def movies_detail(request, movie_id):
-#     movie = Movie.objects.get(id=movie_id)
-#     return render(request, 'movies/detail.html', { 'movie': movie })
+    if not request.user.is_authenticated:
+      user = User.objects.get(id=1)
 
-# @login_required
-# def reviews_index(request):
-#     reviews = Review.objects.all()
-#     return render(request, 'reviews/index.html', {'reviews': reviews})
+    TvReview(tv_review=tv_review, user=user, tv_id=tv_id).save()
 
-# @login_required
-# def reviews_detail(request, review_id):
-#     review = Review.objects.get(id=review_id)
-#     return render(request, 'reviews/detail.html', {'review': review})
+    return redirect(f"/tv/{tv_id}/reviews")
+  
+  else:
+    data = requests.get(f"https://api.themoviedb.org/3/tv/{tv_id}?api_key=27866702f39bce28cfa7752a49f16399&language=en-US")
+    name = data.json()["name"]
+
+    reviews = reversed(TvReview.objects.filter(tv_id=tv_id))
+
+    return render(request, "tv_reviews.html", {"name": name, "reviews": reviews})
+
+
 
 def signup(request):
   error_message = ''
@@ -124,17 +125,16 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
-# Add def assoc_review???
 
 
 
 
-class ReviewCreate(CreateView):
-    model = Review
-    fields = ['review', 'rating']
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+# class ReviewCreate(CreateView):
+#     model = Review
+#     fields = ['review', 'rating']
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         return super().form_valid(form)
 
 # class MovieCreate(LoginRequiredMixin, CreateView):
 #     model = Movie
@@ -143,12 +143,22 @@ class ReviewCreate(CreateView):
 #         form.instance.user = self.request.user
 #         return super().form_valid(form)
     
-class ReviewUpdate(LoginRequiredMixin, UpdateView):
-  model = Review
-  fields = ['review']
+class TvReviewUpdate(LoginRequiredMixin, UpdateView):
+  model = TvReview
+  fields = ['tv_review']
+  success_url ='/'
 
-class ReviewDelete(LoginRequiredMixin, DeleteView):
-  model = Review
+class MovieReviewUpdate(LoginRequiredMixin, UpdateView):
+  model = MovieReview
+  fields = ['movie_review']
+  success_url = '/'
+
+class TvReviewDelete(LoginRequiredMixin, DeleteView):
+  model = TvReview
+  success_url = '/'
+
+class MovieReviewDelete(LoginRequiredMixin, DeleteView):
+  model = MovieReview
   success_url = '/'
 
 # class MovieUpdate(LoginRequiredMixin, UpdateView):

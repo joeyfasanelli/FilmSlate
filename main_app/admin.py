@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import Review
+from .models import MovieReview, TvReview
 
-admin.site.register(Review)
+admin.site.register(MovieReview)
+admin.site.register(TvReview)

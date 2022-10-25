@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Trending</h1>
+<h1 class="text-center">Welcome to FilmSlate!</h1>
+<img src="...">
+<h4>Trending</h4>
 <div id="trendings" class="row">
 
 </div>
@@ -12,11 +14,11 @@
     .then(data => {
         for (let i=0; i<data.results.length; i++){
             var mainDiv = document.createElement("div");
-            mainDiv.setAttribute("class", "card");
+            mainDiv.setAttribute("class", "card text-black");
             mainDiv.setAttribute("style", "width: 18rem; margin: 20px");
             var img = document.createElement("img");
             img.setAttribute("src", "https://image.tmdb.org/t/p/w200" + data.results[i].poster_path);
-            img.setAttribute("class", "card-img-top");
+            img.setAttribute("class", "card-img-top mt-2");
             img.setAttribute("alt", "...");
             var body = document.createElement("div");
             body.setAttribute("class", "card-body");
