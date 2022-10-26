@@ -21,7 +21,7 @@
 <img src="main_app/readme-images/search.png" alt="Search Page"/>
 <img src="main_app/readme-images/movie.png" alt="Movie Page"/>
 <img src="main_app/readme-images/review.png" alt="Review Page"/>
-<img src="main_app/readme-images/detail.png" alt="Detail Page"/>
+<img src="main_app/readme-images/details.png" alt="Detail Page"/>
 
 ## Getting Started
 
