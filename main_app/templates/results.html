@@ -5,10 +5,11 @@ Results
 {% endblock %} 
 
 {% block content %} 
+<br></br>
 <div class="row">
 {% for d in data.results %}
 <div class="card" style="width: 18rem; margin: 10px">
-    <img class="card-img-top" src="https://image.tmdb.org/t/p/original/{{ d.poster_path }}" alt="Card image cap">
+    <img class="card-img-top mt-2" src="https://image.tmdb.org/t/p/original/{{ d.poster_path }}" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title text-black">{{ d.title }}</h5>
       <p class="card-text text-black">{{ d.overview }}</p>
