@@ -1,0 +1,4 @@
+    .image-hover:hover {
+        filter: brightness(120%);
+        transition: filter 0.3s ease;
+    }

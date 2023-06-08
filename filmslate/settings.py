@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zv*vm_8s6u&#twq*@m4s-ui!z8%_m*jq!^r2ewbk)zh)a7l779'
+SECRET_KEY = 'hb-o@w0w2l4h9pv3kcsv%0#pojapz@_5yufja3*pv*(_58!6l1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,7 +77,9 @@ WSGI_APPLICATION = 'filmslate.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'postgres',
         'NAME': 'filmslate',
+        'PASSWORD': ' ',
     }
 }
 
@@ -128,6 +130,3 @@ LOGOUT_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-import django_heroku
-django_heroku.settings(locals())
