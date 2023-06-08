@@ -19,7 +19,7 @@ def search(request):
   query = request.GET.get('q')
 
   if query:
-    data = requests.get(f"https://api.themoviedb.org/3/search/{request.GET.get('type')}?api_key=27866702f39bce28cfa7752a49f16399&language=en-US&page=1&include_adult=false&query={query}")
+    data = requests.get(f"https://api.themoviedb.org/3/search/movie?api_key=27866702f39bce28cfa7752a49f16399&language=en-US&page=1&include_adult=false&query={query}")
 
 
   else:
@@ -55,8 +55,8 @@ def view_movie_detail(request, movie_id):
 
 
 def view_trending_results(request):
-  type = request.GET.get('type') if request.GET.get('type') else "all"
-  trendings = requests.get(f"https://api.themoviedb.org/3/trending/{type}/week?api_key=27866702f39bce28cfa7752a49f16399&language=en-US")
+  # type = request.GET.get('type') if request.GET.get('type') else "all"
+  trendings = requests.get(f"https://api.themoviedb.org/3/trending/movie/week?api_key=27866702f39bce28cfa7752a49f16399&language=en-US")
   return JsonResponse(trendings.json())
 
 
