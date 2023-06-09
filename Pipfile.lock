@@ -112,7 +112,7 @@
             "index": "pypi",
             "version": "==2.5.2"
         },
-        "psycopg2": {
+        "psycopg2-binary": {
             "hashes": [
                 "sha256:07b90a24d5056687781ddaef0ea172fd951f2f7293f6ffdd03d4f5077801f426",
                 "sha256:1da77c061bdaab450581458932ae5e469cc6e36e0d62f988376e9f513f11cb5c",
@@ -127,7 +127,7 @@
                 "sha256:d529926254e093a1b669f692a3aa50069bc71faf5b0ecd91686a78f62767d52f"
             ],
             "index": "pypi",
-            "version": "==2.9.4"
+            "version": "==2.9.6"
         },
         "requests": {
             "hashes": [
