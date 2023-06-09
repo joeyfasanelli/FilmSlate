@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'filmslate.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'URL': 'postgresql://postgres: @containers-us-west-2.railway.app:7656/railway',
+        'URL': '',
         'NAME': 'filmslate',
         'USER': 'postgres',
-        'PASSWORD': 'okVk9e7FcB95v3dqJgaq',
-        'HOST': 'containers-us-west-2.railway.app',
-        'PORT': '7656'
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': ''
     }
 }
 
